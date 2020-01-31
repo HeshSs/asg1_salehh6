@@ -69,30 +69,19 @@ public class Main {
 	}
 	
 	// Question 13
-	public static double efficientProgram1(double n) {
-		return Math.pow(n, Math.pow(n, 3));
-	}
-	
-	public static double efficientProgram2(double n, int i) {
+	public static double efficientProgram(double n, int i) {
+		if (n == 0) return 0;
 		if (i == 0) return n;
-		return Math.pow(n, efficientProgram2(n, i-1));
+		return Math.pow(n, efficientProgram(n, i-1));
 	}
 	
 	public static void timer(double n) {
-		System.out.println(n);
-	    long start1 = System.nanoTime();
-	    System.out.println("E1  " + efficientProgram1(n));
-	    long finish1 = System.nanoTime();
-		long timeElapsed1 = (finish1 - start1); 
-		
-		System.out.println("The time elapsed for efficientProgram1 is: " + timeElapsed1);
-		
 	    long start2 = System.nanoTime();
-	    System.out.println("E2  " + efficientProgram2(n, 3));
+	    System.out.println(efficientProgram(n, 3));
 	    long finish2 = System.nanoTime();
-		long timeElapsed2 = (finish2 - start2); 
+		long timeElapsed = (finish2 - start2); 
 
-		System.out.println("The time elapsed for efficientProgram2 is: " + timeElapsed2);
+		System.out.println("The time elapsed for efficientProgram2 is: " + timeElapsed);
 
 	}
 }
