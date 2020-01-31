@@ -1,5 +1,9 @@
+package asg1_salehh6;
 import java.util.Iterator;
 
+/**
+ * Question 1
+ */
 public class MarblesBag implements Iterable<Marble> {
 	private Node first;
 
@@ -8,17 +12,18 @@ public class MarblesBag implements Iterable<Marble> {
 		Node next;
 	}
 	
+	// Constructor
     public MarblesBag() {
         first = null;
     }
 
-	public void add(String name, String colour, double weight) throws Exception {
+	public void add(String name) throws Exception {
 		if (this.containsName(name)) {
 			throw new Exception("The Marble Bag already contains " + name);
 		} else {
 			Node oldfirst = first;
 			first = new Node();
-			first.item = new Marble(name, colour, weight);
+			first.item = new Marble(name);
 			first.next = oldfirst;
 		}
 	}
@@ -32,7 +37,7 @@ public class MarblesBag implements Iterable<Marble> {
 		return false;
 	}
 	
-	public boolean containsColour(String colour) {
+	public boolean containsColour(Marble.Colour colour) {
 		for (Marble marble : this) {
 			if (marble.getColour().equals(colour)) {
 				return true;
@@ -57,7 +62,7 @@ public class MarblesBag implements Iterable<Marble> {
 		}
 	}
 	
-	public void delc(String colour) throws Exception {
+	public void delc(Marble.Colour colour) throws Exception {
 		if (!this.containsColour(colour)) {
 			throw new Exception("The Marble Bag doesn't contain Marble with this colour");
 		} else {
@@ -78,24 +83,59 @@ public class MarblesBag implements Iterable<Marble> {
         return first == null;
     }
 
-    public boolean isEmptyC(String colour) {
-    	//TODO
+    public boolean isEmptyC(Marble.Colour colour) {
+		for (Marble marble : this) {
+			if (marble.getColour().equals(colour)) {
+				return false;
+			}
+		}
+		return true;
     }
     
     public int size() {
-    	//TODO
+    	int counter = 0;
+		for (Marble marble : this) {
+			counter ++;
+		}
+		return counter;
     }
     
-    public int sizeC(String colour) {
-    	//TODO
+    public int sizeC(Marble.Colour colour) {
+    	int counter = 0;
+		for (Marble marble : this) {
+			if (marble.getColour().equals(colour)) {
+				counter++;
+			}
+		}
+		return counter;
     }
     
-    public int maxw() {
-    	//TODO
+    public double maxw() throws Exception {
+    	double max = Integer.MIN_VALUE;
+    	if (this.isEmpty() == true) {
+    		throw new Exception("The Marbles Bag is empty.");
+    	} else {
+    		for (Marble marble : this) {
+    			if (marble.getWeight() > max) {
+    				max = marble.getWeight();
+    			}
+    		}
+    	}
+    	return max;
     }
     
-    public int minw() {
-    	//TODO
+    public double minw() throws Exception {
+    	double min = Integer.MIN_VALUE;
+    	if (this.isEmpty() == true) {
+    		throw new Exception("The Marbles Bag is empty.");
+    	} else {
+    		for (Marble marble : this) {
+    			if (marble.getWeight() < min) {
+    				min = marble.getWeight();
+    			}
+    		}
+    	}
+    	return min;
     }
     
 	public Iterator<Marble> iterator() {
